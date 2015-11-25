@@ -10,7 +10,7 @@ class XPathTest extends \PHPUnit_Framework_TestCase
      * It should throw an exception if the xpath query is invalid
      *
      * @expectedException PhpBench\Dom\Exception\InvalidQueryException
-     * @expectedExceptionMessage function noexistfunc not found
+     * @expectedExceptionMessage Errors encountered
      */
     public function testQueryException()
     {

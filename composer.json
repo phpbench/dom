@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": "^5.0|^7.0",
+        "php": "^5.4|^7.0",
         "ext-dom": "*"
     },
     "require-dev": {
