@@ -2,6 +2,7 @@ DOM
 ===
 
 [![Build Status](https://travis-ci.org/phpbench/dom.svg?branch=master)](https://travis-ci.org/phpbench/dom)
+[![StyleCI](https://styleci.io/repos/46851513/shield)](https://styleci.io/repos/46851513)
 
 This library provides a wrapper for the PHP DOM library which makes your life
 easier.

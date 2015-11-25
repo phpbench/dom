@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tabular  package
+ * This file is part of the PhpBench DOM  package
  *
  * (c) Daniel Leech <daniel@dantleech.com>
  *
@@ -22,6 +22,7 @@ class XPath extends \DOMXPath
     public function evaluate($expr, \DOMNode $contextEl = null, $registerNodeNs = null)
     {
         $result = $this->execute('evaluate', 'expression', $expr, $contextEl, $registerNodeNs);
+
         return $result;
     }
 
@@ -34,14 +35,14 @@ class XPath extends \DOMXPath
     }
 
     /**
-     * Query for one node
+     * Query for one node.
      */
     public function queryOne($expr, \DOMNode $contextEl = null, $registerNodeNs = null)
     {
         $nodeList = $this->query($expr, $contextEl, $registerNodeNs);
 
         if (0 === $nodeList->length) {
-            return null;
+            return;
         }
 
         return $nodeList->item(0);
@@ -58,7 +59,7 @@ class XPath extends \DOMXPath
 
         $xmlErrors = libxml_get_errors();
         if ($xmlErrors) {
-            $errors = array();
+            $errors = [];
             foreach ($xmlErrors as $xmlError) {
                 $errors[] = sprintf('[%s] %s', $xmlError->code, $xmlError->message);
             }

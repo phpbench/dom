@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the PhpBench DOM  package
+ *
+ * (c) Daniel Leech <daniel@dantleech.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace PhpBench\Dom\Tests\Unit;
 
 use PhpBench\Dom\Document;
@@ -17,7 +26,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should perform an XPath query
+     * It should perform an XPath query.
      */
     public function testQuery()
     {
@@ -28,7 +37,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should evaluate an XPath expression
+     * It should evaluate an XPath expression.
      */
     public function testEvaluate()
     {
@@ -38,7 +47,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should create a root element
+     * It should create a root element.
      */
     public function testCreateRoot()
     {
@@ -47,7 +56,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should return a formatted string representation of the document
+     * It should return a formatted string representation of the document.
      */
     public function testDump()
     {
@@ -70,8 +79,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         <title>World</title>
     </record>
 </document>
-EOT
-        ;
+EOT;
 
         return $xml;
     }

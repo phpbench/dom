@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the PhpBench DOM  package
+ *
+ * (c) Daniel Leech <daniel@dantleech.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace PhpBench\Dom\Tests\Unit;
 
 use PhpBench\Dom\Document;
@@ -7,7 +16,7 @@ use PhpBench\Dom\Document;
 class XPathTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * It should throw an exception if the xpath query is invalid
+     * It should throw an exception if the xpath query is invalid.
      *
      * @expectedException PhpBench\Dom\Exception\InvalidQueryException
      * @expectedExceptionMessage Errors encountered
@@ -38,8 +47,7 @@ class XPathTest extends \PHPUnit_Framework_TestCase
         <title>Afternoon</title>
     </article>
 </document>
-EOT
-        ;
+EOT;
 
         $document = new Document();
         $document->loadXml($xml);
