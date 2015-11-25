@@ -54,7 +54,12 @@ It implements the `XPathAware` interface.
 Element
 -------
 
+Wraps the `\DOMElement` class and is used by default when you instantiate a
+`PhpBench\Dom\Document` class.
+
+It implements the `XPathAware` interface.
+
 - `appendElement($name $value)`: Create and return an element with name
   `$name` and value `$value`.
-- `query`, `queryOne` and `evalauate`: As with Document but will use the context of this element by
+- `query`, `queryOne` and `evaluate`: As with Document but will use the context of this element by
   default.
