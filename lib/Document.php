@@ -85,4 +85,18 @@ class Document extends \DOMDocument implements XPathAware
     {
         return $this->xpath()->evaluate($expression, $context);
     }
+
+    /**
+     * Return a formatted string representation of the document.
+     *
+     * @return string
+     */
+    public function dump()
+    {
+        $this->formatOutput = true;
+        $result = $this->saveXml();
+        $this->formatOutput = false;
+
+        return $result;
+    }
 }

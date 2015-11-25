@@ -56,12 +56,13 @@ class XPath extends \DOMXPath
 
         $value = @parent::$method($query, $contextEl, $registerNodeNs);
 
-        if (false === $value) {
-            $xmlErrors = libxml_get_errors();
+        $xmlErrors = libxml_get_errors();
+        if ($xmlErrors) {
             $errors = array();
             foreach ($xmlErrors as $xmlError) {
                 $errors[] = sprintf('[%s] %s', $xmlError->code, $xmlError->message);
             }
+            libxml_clear_errors();
 
             throw new Exception\InvalidQueryException(sprintf(
                 'Errors encountered when evaluating XPath %s "%s": %s%s',

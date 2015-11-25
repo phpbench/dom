@@ -49,6 +49,7 @@ It implements the `XPathAware` interface.
 - `queryOne($query, $context = null)`: Execute a given XPath query on the
   document and return the first element or `NULL`.
 - `evaluate($query, $context = null)`: Evaluate the given XPath expression.
+- `dump()`: Return a formatted string representation of the document.
 
 Element
 -------

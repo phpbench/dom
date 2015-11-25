@@ -46,6 +46,18 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('<hello/>', $this->document->saveXml());
     }
 
+    /**
+     * It should return a formatted string representation of the document
+     */
+    public function testDump()
+    {
+        $this->document->loadXml($this->getXml());
+        $this->assertEquals(
+            trim($this->getXml()),
+            trim($this->document->dump())
+        );
+    }
+
     private function getXml()
     {
         $xml = <<<EOT

@@ -18,14 +18,12 @@ class XPathTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should throw an exception if the xpath expression is invalid
-     *
-     * @expectedException PhpBench\Dom\Exception\InvalidQueryException
-     * @expectedExceptionMessage function noexistfunc not found
+     * It should NOT throw an exception if the expression evaluates as false.
      */
-    public function testEvaluateException()
+    public function testEvaluateFalse()
     {
-        $this->getDocument()->evaluate('//article[noexistfunc() = "as"]');
+        $result = $this->getDocument()->evaluate('boolean(count(//foo))');
+        $this->assertFalse($result);
     }
 
     private function getDocument()
