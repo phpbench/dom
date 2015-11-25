@@ -1,10 +1,13 @@
 DOM
 ===
 
+[![Build Status](https://travis-ci.org/phpbench/dom.svg?branch=master)](https://travis-ci.org/phpbench/dom)
+
 This library provides a wrapper for the PHP DOM library which makes your life
 easier.
 
-It wraps the `\DOMDocument`, `\DOMElement` and `\DOMXpath` classes.`
+It wraps the `\DOMDocument`, `\DOMElement` and `\DOMXpath` classes and
+throws *exceptions*.
 
 Example:
 
@@ -21,8 +24,8 @@ echo $dom->saveXml();
 //   <baz>world</baz>
 // </example>
 
-$element->appendChild('number', 5);
-$element->appendChild('number', 10);
+$element->appendElement('number', 5);
+$element->appendElement('number', 10);
 
 echo $element->evaluate('sum(./number)'); // 15
 
