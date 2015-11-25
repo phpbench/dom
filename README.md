@@ -17,7 +17,7 @@ $element = $dom->createRoot('example');
 $element->appendChild('boo', 'hello');
 $element->appendChild('baz', 'world');
 
-echo $dom->saveXml();
+echo $dom->dump();
 // <?xml version="1.0"?>
 // <example>
 //   <boo>hello</boo>
