@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the PHPBench package
+ * This file is part of the PhpBench DOM  package
  *
  * (c) Daniel Leech <daniel@dantleech.com>
  *
@@ -10,8 +10,6 @@
  */
 
 namespace PhpBench\Dom;
-
-use PhpBench\Dom\XPathAware;
 
 /**
  * Wrapper for the \DOMElement class.
@@ -22,7 +20,8 @@ class Element extends \DOMElement implements XPathAware
      * Create and append an element with the given name and optionally given value.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return Element
      */
     public function appendElement($name, $value = null)

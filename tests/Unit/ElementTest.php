@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the PhpBench DOM  package
+ *
+ * (c) Daniel Leech <daniel@dantleech.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace PhpBench\Dom\Tests\Unit;
 
 use PhpBench\Dom\Document;
@@ -16,7 +25,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should create and append a child element
+     * It should create and append a child element.
      */
     public function testAppendElement()
     {
@@ -27,7 +36,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should exeucte an XPath query
+     * It should exeucte an XPath query.
      */
     public function testQuery()
     {
@@ -40,7 +49,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should evaluate an XPath expression
+     * It should evaluate an XPath expression.
      */
     public function testEvaluate()
     {
@@ -52,7 +61,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * It should query for one element
+     * It should query for one element.
      */
     public function testQueryOne()
     {
@@ -82,8 +91,7 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         <title>World</title>
     </record>
 </document>
-EOT
-        ;
+EOT;
 
         return $xml;
     }

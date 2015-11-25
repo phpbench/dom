@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the PHPBench package
+ * This file is part of the PhpBench DOM  package
  *
  * (c) Daniel Leech <daniel@dantleech.com>
  *
@@ -10,10 +10,6 @@
  */
 
 namespace PhpBench\Dom;
-
-use PhpBench\Dom\Element;
-use PhpBench\Dom\XPath;
-use PhpBench\Dom\XPathAware;
 
 /**
  * Wrapper for the \DOMDocument class.
@@ -27,7 +23,7 @@ class Document extends \DOMDocument implements XPathAware
 
     /**
      * @param string $version
-     * @param mixed $encoding
+     * @param mixed  $encoding
      */
     public function __construct($version = '1.0', $encoding = null)
     {
@@ -36,9 +32,10 @@ class Document extends \DOMDocument implements XPathAware
     }
 
     /**
-     * Create and return a root DOM element
+     * Create and return a root DOM element.
      *
      * @param string $name
+     *
      * @return Element
      */
     public function createRoot($name)
