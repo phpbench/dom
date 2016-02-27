@@ -96,4 +96,14 @@ class Document extends \DOMDocument implements XPathAware
 
         return $result;
     }
+
+    public function duplicate()
+    {
+        $dom = new self();
+        $firstChild = $dom->importNode($this->firstChild, true);
+
+        $dom->appendChild($firstChild);
+
+        return $dom;
+    }
 }

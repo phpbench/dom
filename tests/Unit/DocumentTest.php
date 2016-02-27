@@ -67,6 +67,19 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * It should provide a duplicate version of itself.
+     */
+    public function testDuplicate()
+    {
+        $this->document->loadXml($this->getXml());
+        $duplicate = $this->document->duplicate();
+        $this->assertNotsame($this->document, $duplicate);
+        $this->assertNotsame($this->document->firstChild, $duplicate->firstChild);
+        $this->assertNotsame($this->document->firstChild->firstChild, $duplicate->firstChild->firstChild);
+    }
+
+
     private function getXml()
     {
         $xml = <<<EOT
