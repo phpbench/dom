@@ -79,6 +79,24 @@ class ElementTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($node);
     }
 
+    /**
+     * It should return the XML contained in the node.
+     */
+    public function testDumpNode()
+    {
+        $this->element->appendElement('boo');
+        $dump = $this->element->dump();
+
+        $this->assertEquals(<<<EOT
+<?xml version="1.0"?>
+<test>
+  <boo/>
+</test>
+
+EOT
+        , $dump);
+    }
+
     private function getXml()
     {
         $xml = <<<EOT

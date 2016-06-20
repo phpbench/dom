@@ -49,4 +49,15 @@ class Element extends \DOMElement implements XPathAware
     {
         return $this->ownerDocument->xpath()->evaluate($expression, $context ?: $this);
     }
+
+    /**
+     * Dump the current node
+     */
+    public function dump()
+    {
+        $document = new Document();
+        $document->appendChild($document->importNode($this, true));
+
+        return $document->dump();
+    }
 }
