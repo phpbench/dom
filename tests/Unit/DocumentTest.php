@@ -11,16 +11,17 @@
 
 namespace PhpBench\Dom\Tests\Unit;
 
+use PHPUnit\Framework\TestCase;
 use PhpBench\Dom\Document;
 
-class DocumentTest extends \PHPUnit_Framework_TestCase
+class DocumentTest extends TestCase
 {
     /**
      * @var Document
      */
     private $document;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->document = new Document(1.0);
     }
@@ -52,7 +53,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     public function testCreateRoot()
     {
         $this->document->createRoot('hello');
-        $this->assertContains('<hello/>', $this->document->saveXml());
+        $this->assertStringContainsString('<hello/>', $this->document->saveXml());
     }
 
     /**
