@@ -11,14 +11,15 @@
 
 namespace PhpBench\Dom\Tests\Unit;
 
+use PHPUnit\Framework\TestCase;
 use PhpBench\Dom\Document;
 
-class ElementTest extends \PHPUnit_Framework_TestCase
+class ElementTest extends TestCase
 {
     private $element;
     private $document;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->document = new Document();
         $this->element = $this->document->createRoot('test');
