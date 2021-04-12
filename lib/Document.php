@@ -11,13 +11,18 @@
 
 namespace PhpBench\Dom;
 
+use DOMNode;
+use DOMNodeList;
+use RuntimeException;
+
+
 /**
  * Wrapper for the \DOMDocument class.
  */
 class Document extends \DOMDocument implements XPathAware
 {
     /**
-     * @var XPath
+     * @var XPath|null
      */
     private $xpath;
 
@@ -38,9 +43,11 @@ class Document extends \DOMDocument implements XPathAware
      *
      * @return Element
      */
-    public function createRoot($name)
+    public function createRoot($name): Element
     {
-        return $this->appendChild(new Element($name));
+        $element = $this->appendChild(new Element($name));
+        assert($element instanceof Element);
+        return $element;
     }
 
     /**
@@ -48,7 +55,7 @@ class Document extends \DOMDocument implements XPathAware
      *
      * @return XPath
      */
-    public function xpath()
+    public function xpath(): XPath
     {
         if ($this->xpath) {
             return $this->xpath;
@@ -60,9 +67,9 @@ class Document extends \DOMDocument implements XPathAware
     }
 
     /**
-     * {@inheritdoc}
+     * @return DOMNodeList<DOMNode>
      */
-    public function query($query, \DOMNode $context = null)
+    public function query($query, DOMNode $context = null): DOMNodeList
     {
         return $this->xpath()->query($query, $context);
     }
@@ -70,7 +77,7 @@ class Document extends \DOMDocument implements XPathAware
     /**
      * {@inheritdoc}
      */
-    public function queryOne($query, \DOMNode $context = null)
+    public function queryOne($query, DOMNode $context = null)
     {
         return $this->xpath()->queryOne($query, $context);
     }
@@ -88,16 +95,20 @@ class Document extends \DOMDocument implements XPathAware
      *
      * @return string
      */
-    public function dump()
+    public function dump(): string
     {
         $this->formatOutput = true;
         $result = $this->saveXml();
         $this->formatOutput = false;
 
+        if (false === $result) {
+            throw new RuntimeException('Could not dump XML');
+        }
+
         return $result;
     }
 
-    public function duplicate()
+    public function duplicate(): Document
     {
         $dom = new self();
         $firstChild = $dom->importNode($this->firstChild, true);

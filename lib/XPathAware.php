@@ -11,6 +11,9 @@
 
 namespace PhpBench\Dom;
 
+use DOMNode;
+use DOMNodeList;
+
 interface XPathAware
 {
     /**
@@ -23,7 +26,7 @@ interface XPathAware
      * @param string   $query
      * @param \DOMNode $context
      *
-     * @return \DOMNodeList
+     * @return DOMNodeList<DOMNode>
      */
     public function query($query, \DOMNode $context = null);
 

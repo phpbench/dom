@@ -11,6 +11,11 @@
 
 namespace PhpBench\Dom;
 
+use DOMNode;
+use DOMNodeList;
+use RuntimeException;
+
+
 /**
  * Wrapper for the \DOMXPath class.
  */
@@ -19,39 +24,47 @@ class XPath extends \DOMXPath
     /**
      * {@inheritdoc}
      */
-    public function evaluate($expr, \DOMNode $contextEl = null, $registerNodeNs = null)
+    public function evaluate ($expression, $contextnode = null, $registerNodeNS = true)
     {
-        $result = $this->execute('evaluate', 'expression', $expr, $contextEl, $registerNodeNs);
+        $result = $this->execute('evaluate', 'expression', $expression, $contextnode, $registerNodeNS);
 
         return $result;
     }
 
     /**
-     * {@inheritdoc}
+     * @return DOMNodeList<DOMNode>
      */
-    public function query($expr, \DOMNode $contextEl = null, $registerNodeNs = null)
+    public function query ($expression, $contextnode = null, $registerNodeNS = true)
     {
-        return $this->execute('query', 'query', $expr, $contextEl, $registerNodeNs);
+        return $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
     }
 
-    /**
-     * Query for one node.
-     */
-    public function queryOne($expr, \DOMNode $contextEl = null, $registerNodeNs = null)
+    public function queryOne(string $expr, DOMNode $contextEl = null, bool $registerNodeNs = false): ?Element
     {
         $nodeList = $this->query($expr, $contextEl, $registerNodeNs);
 
         if (0 === $nodeList->length) {
-            return;
+            return null;
         }
 
-        return $nodeList->item(0);
+        $node = $nodeList->item(0);
+
+        if (!$node instanceof Element) {
+            throw new RuntimeException(sprintf(
+                'Expected "%s" but got "%s"',
+                Element::class,
+                get_class($node)
+            ));
+        }
+
+        return $node;
     }
 
     /**
      * Execute the given xpath method and cactch any errors.
+     * @return mixed
      */
-    private function execute($method, $context, $query, \DOMNode $contextEl = null, $registerNodeNs)
+    private function execute(string $method, string $context, string $query, DOMNode $contextEl = null, bool $registerNodeNs = false)
     {
         libxml_use_internal_errors(true);
 
