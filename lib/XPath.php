@@ -15,7 +15,6 @@ use DOMNode;
 use DOMNodeList;
 use RuntimeException;
 
-
 /**
  * Wrapper for the \DOMXPath class.
  */
@@ -24,7 +23,7 @@ class XPath extends \DOMXPath
     /**
      * {@inheritdoc}
      */
-    public function evaluate ($expression, $contextnode = null, $registerNodeNS = true)
+    public function evaluate($expression, $contextnode = null, $registerNodeNS = true)
     {
         $result = $this->execute('evaluate', 'expression', $expression, $contextnode, $registerNodeNS);
 
@@ -34,7 +33,7 @@ class XPath extends \DOMXPath
     /**
      * @return DOMNodeList<DOMNode>
      */
-    public function query ($expression, $contextnode = null, $registerNodeNS = true)
+    public function query($expression, $contextnode = null, $registerNodeNS = true)
     {
         return $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
     }
@@ -62,6 +61,7 @@ class XPath extends \DOMXPath
 
     /**
      * Execute the given xpath method and cactch any errors.
+     *
      * @return mixed
      */
     private function execute(string $method, string $context, string $query, DOMNode $contextEl = null, bool $registerNodeNs = false)
@@ -71,8 +71,10 @@ class XPath extends \DOMXPath
         $value = @parent::$method($query, $contextEl, $registerNodeNs);
 
         $xmlErrors = libxml_get_errors();
+
         if ($xmlErrors) {
             $errors = [];
+
             foreach ($xmlErrors as $xmlError) {
                 $errors[] = sprintf('[%s] %s', $xmlError->code, $xmlError->message);
             }

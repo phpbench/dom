@@ -14,7 +14,6 @@ namespace PhpBench\Dom;
 use DOMNode;
 use DOMNodeList;
 
-
 /**
  * Wrapper for the \DOMElement class.
  */
@@ -32,18 +31,19 @@ class Element extends \DOMElement implements XPathAware
     {
         $element = $this->appendChild(new self($name, $value));
         assert($element instanceof Element);
+
         return $element;
     }
 
     /**
      * @return DOMNodeList<DOMNode>
      */
-    public function query($xpath, \DOMNode $context = null): DOMNodeList
+    public function query($xpath, DOMNode $context = null): DOMNodeList
     {
         return $this->owner()->xpath()->query($xpath, $context ?: $this);
     }
 
-    public function queryOne($xpath, \DOMNode $context = null)
+    public function queryOne($xpath, DOMNode $context = null)
     {
         return $this->owner()->xpath()->queryOne($xpath, $context ?: $this);
     }
@@ -51,7 +51,7 @@ class Element extends \DOMElement implements XPathAware
     /**
      * {@inheritdoc}
      */
-    public function evaluate($expression, \DOMNode $context = null)
+    public function evaluate($expression, DOMNode $context = null)
     {
         return $this->owner()->xpath()->evaluate($expression, $context ?: $this);
     }
@@ -71,6 +71,7 @@ class Element extends \DOMElement implements XPathAware
     {
         $owner = $this->ownerDocument;
         assert($owner instanceof Document);
-        return $owner; 
+
+        return $owner;
     }
 }

@@ -15,7 +15,6 @@ use DOMNode;
 use DOMNodeList;
 use RuntimeException;
 
-
 /**
  * Wrapper for the \DOMDocument class.
  */
@@ -41,19 +40,18 @@ class Document extends \DOMDocument implements XPathAware
      *
      * @param string $name
      *
-     * @return Element
      */
     public function createRoot($name): Element
     {
         $element = $this->appendChild(new Element($name));
         assert($element instanceof Element);
+
         return $element;
     }
 
     /**
      * Return the XPath object bound to this document.
      *
-     * @return XPath
      */
     public function xpath(): XPath
     {
@@ -85,7 +83,7 @@ class Document extends \DOMDocument implements XPathAware
     /**
      * {@inheritdoc}
      */
-    public function evaluate($expression, \DOMNode $context = null)
+    public function evaluate($expression, DOMNode $context = null)
     {
         return $this->xpath()->evaluate($expression, $context);
     }
@@ -93,7 +91,6 @@ class Document extends \DOMDocument implements XPathAware
     /**
      * Return a formatted string representation of the document.
      *
-     * @return string
      */
     public function dump(): string
     {
