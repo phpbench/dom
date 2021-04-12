@@ -11,6 +11,9 @@
 
 namespace PhpBench\Dom;
 
+use DOMNode;
+use DOMNodeList;
+
 /**
  * Wrapper for the \DOMElement class.
  */
@@ -26,38 +29,49 @@ class Element extends \DOMElement implements XPathAware
      */
     public function appendElement($name, $value = null)
     {
-        return $this->appendChild(new self($name, $value));
+        $element = $this->appendChild(new self($name, $value));
+        assert($element instanceof Element);
+
+        return $element;
+    }
+
+    /**
+     * @return DOMNodeList<DOMNode>
+     */
+    public function query($xpath, DOMNode $context = null): DOMNodeList
+    {
+        return $this->owner()->xpath()->query($xpath, $context ?: $this);
+    }
+
+    public function queryOne($xpath, DOMNode $context = null)
+    {
+        return $this->owner()->xpath()->queryOne($xpath, $context ?: $this);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function query($xpath, \DOMNode $context = null)
+    public function evaluate($expression, DOMNode $context = null)
     {
-        return $this->ownerDocument->xpath()->query($xpath, $context ?: $this);
-    }
-
-    public function queryOne($xpath, \DOMNode $context = null)
-    {
-        return $this->ownerDocument->xpath()->queryOne($xpath, $context ?: $this);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function evaluate($expression, \DOMNode $context = null)
-    {
-        return $this->ownerDocument->xpath()->evaluate($expression, $context ?: $this);
+        return $this->owner()->xpath()->evaluate($expression, $context ?: $this);
     }
 
     /**
      * Dump the current node
      */
-    public function dump()
+    public function dump(): string
     {
         $document = new Document();
         $document->appendChild($document->importNode($this, true));
 
         return $document->dump();
+    }
+
+    private function owner(): Document
+    {
+        $owner = $this->ownerDocument;
+        assert($owner instanceof Document);
+
+        return $owner;
     }
 }

@@ -11,6 +11,9 @@
 
 namespace PhpBench\Dom;
 
+use DOMNode;
+use DOMNodeList;
+
 interface XPathAware
 {
     /**
@@ -23,9 +26,9 @@ interface XPathAware
      * @param string   $query
      * @param \DOMNode $context
      *
-     * @return \DOMNodeList
+     * @return DOMNodeList<DOMNode>
      */
-    public function query($query, \DOMNode $context = null);
+    public function query($query, DOMNode $context = null);
 
     /**
      * As with XPathAware::query but return a single node or NULL if no node was found.
@@ -35,7 +38,7 @@ interface XPathAware
      *
      * @return Element|null
      */
-    public function queryOne($query, \DOMNode $context = null);
+    public function queryOne($query, DOMNode $context = null);
 
     /**
      * Evaluate an XPath expression on this document, optionally
@@ -49,5 +52,5 @@ interface XPathAware
      *
      * @return mixed
      */
-    public function evaluate($expression, \DOMNode $context = null);
+    public function evaluate($expression, DOMNode $context = null);
 }

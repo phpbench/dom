@@ -11,15 +11,15 @@
 
 namespace PhpBench\Dom\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
 use PhpBench\Dom\Document;
+use PHPUnit\Framework\TestCase;
 
 class ElementTest extends TestCase
 {
     private $element;
     private $document;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->document = new Document();
         $this->element = $this->document->createRoot('test');
@@ -28,7 +28,7 @@ class ElementTest extends TestCase
     /**
      * It should create and append a child element.
      */
-    public function testAppendElement()
+    public function testAppendElement(): void
     {
         $element = $this->element->appendElement('hello');
         $result = $this->document->evaluate('count(//hello)');
@@ -39,7 +39,7 @@ class ElementTest extends TestCase
     /**
      * It should exeucte an XPath query.
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $boo = $this->element->appendElement('boo');
         $nodeList = $this->element->query('.//*');
@@ -52,7 +52,7 @@ class ElementTest extends TestCase
     /**
      * It should evaluate an XPath expression.
      */
-    public function testEvaluate()
+    public function testEvaluate(): void
     {
         $boo = $this->element->appendElement('boo');
         $count = $this->element->evaluate('count(.//*)');
@@ -64,7 +64,7 @@ class ElementTest extends TestCase
     /**
      * It should query for one element.
      */
-    public function testQueryOne()
+    public function testQueryOne(): void
     {
         $boo = $this->element->appendElement('boo');
         $node = $this->element->queryOne('./boo');
@@ -74,7 +74,7 @@ class ElementTest extends TestCase
     /**
      * It should return null if one element is queried for an it none exist.
      */
-    public function testQueryOneNone()
+    public function testQueryOneNone(): void
     {
         $node = $this->element->queryOne('./boo');
         $this->assertNull($node);
@@ -83,7 +83,7 @@ class ElementTest extends TestCase
     /**
      * It should return the XML contained in the node.
      */
-    public function testDumpNode()
+    public function testDumpNode(): void
     {
         $this->element->appendElement('boo');
         $dump = $this->element->dump();

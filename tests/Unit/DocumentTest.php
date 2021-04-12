@@ -11,8 +11,8 @@
 
 namespace PhpBench\Dom\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
 use PhpBench\Dom\Document;
+use PHPUnit\Framework\TestCase;
 
 class DocumentTest extends TestCase
 {
@@ -21,7 +21,7 @@ class DocumentTest extends TestCase
      */
     private $document;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->document = new Document(1.0);
     }
@@ -29,7 +29,7 @@ class DocumentTest extends TestCase
     /**
      * It should perform an XPath query.
      */
-    public function testQuery()
+    public function testQuery(): void
     {
         $this->document->loadXml($this->getXml());
         $nodeList = $this->document->query('//record');
@@ -40,7 +40,7 @@ class DocumentTest extends TestCase
     /**
      * It should evaluate an XPath expression.
      */
-    public function testEvaluate()
+    public function testEvaluate(): void
     {
         $this->document->loadXml($this->getXml());
         $result = $this->document->evaluate('count(//record)');
@@ -50,7 +50,7 @@ class DocumentTest extends TestCase
     /**
      * It should create a root element.
      */
-    public function testCreateRoot()
+    public function testCreateRoot(): void
     {
         $this->document->createRoot('hello');
         $this->assertStringContainsString('<hello/>', $this->document->saveXml());
@@ -59,7 +59,7 @@ class DocumentTest extends TestCase
     /**
      * It should return a formatted string representation of the document.
      */
-    public function testDump()
+    public function testDump(): void
     {
         $this->document->loadXml($this->getXml());
         $this->assertEquals(
@@ -71,7 +71,7 @@ class DocumentTest extends TestCase
     /**
      * It should provide a duplicate version of itself.
      */
-    public function testDuplicate()
+    public function testDuplicate(): void
     {
         $this->document->loadXml($this->getXml());
         $duplicate = $this->document->duplicate();

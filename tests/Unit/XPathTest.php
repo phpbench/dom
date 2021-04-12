@@ -11,16 +11,16 @@
 
 namespace PhpBench\Dom\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
 use PhpBench\Dom\Document;
 use PhpBench\Dom\Exception\InvalidQueryException;
+use PHPUnit\Framework\TestCase;
 
 class XPathTest extends TestCase
 {
     /**
      * It should throw an exception if the xpath query is invalid.
      */
-    public function testQueryException()
+    public function testQueryException(): void
     {
         $this->expectException(InvalidQueryException::class);
         $this->getDocument()->query('//article[noexistfunc() = "as"]');
@@ -29,7 +29,7 @@ class XPathTest extends TestCase
     /**
      * It should NOT throw an exception if the expression evaluates as false.
      */
-    public function testEvaluateFalse()
+    public function testEvaluateFalse(): void
     {
         $result = $this->getDocument()->evaluate('boolean(count(//foo))');
         $this->assertFalse($result);
