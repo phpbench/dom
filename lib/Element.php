@@ -29,7 +29,10 @@ class Element extends \DOMElement implements XPathAware
      */
     public function appendTextNode($name, $value = null)
     {
-        $element = $this->appendChild(new self($name, $this->owner()->createTextNode($value)));
+        $el = new self($name);
+        $el->appendChild($this->owner()->createTextNode($value));
+        
+        $element = $this->appendChild($el);
         assert($element instanceof Element);
 
         return $element;
