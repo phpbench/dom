@@ -20,15 +20,19 @@ use DOMNodeList;
 class Element extends \DOMElement implements XPathAware
 {
     /**
-     * Create and append a text-node with the given value.
+     * Create and append a text-node with the given name and given value.
      *
+     * @param string $name
      * @param string $value
      *
      * @return Element
      */
-    public function appendTextNode($value)
-    {
-        $element = $this->appendChild($this->owner()->createTextNode($value));
+    public function appendTextNode($name, $value)
+    {  
+        $el = new self($name)
+        $el->appendChild($this->owner()->createTextNode($value));
+        
+        $element = $this->appendChild($el);
         assert($element instanceof Element);
 
         return $element;
