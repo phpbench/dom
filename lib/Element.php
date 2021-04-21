@@ -20,7 +20,7 @@ use DOMNodeList;
 class Element extends \DOMElement implements XPathAware
 {
     /**
-     * Create and append a text-node with the given name and given value.
+     * Create and append a text-node with the given name and value.
      *
      * @param string $name
      * @param string $value
