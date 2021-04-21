@@ -36,6 +36,7 @@ class Element extends \DOMElement implements XPathAware
         $element->appendChild(
             $this->owner()->createTextNode($value)
         );
+
         return $element;
     }
     
