@@ -38,6 +38,8 @@ class Element extends \DOMElement implements XPathAware
     /**
      * Create and append an element with the given name and optionally given value.
      *
+     * Note: The value will not be escaped. Use DOMDocument::createTextNode() to create a text node with escaping support.
+     *
      * @param string $name
      * @param mixed  $value
      *
