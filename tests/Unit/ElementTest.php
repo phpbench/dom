@@ -42,7 +42,7 @@ class ElementTest extends TestCase
     public function testAppendTextNode(): void
     {
         $element = $this->element->appendTextNode('fix&foxy');
-        $result = $this->document->evaluate('count(//fix&foxy)');
+        $result = $this->document->evaluate('count(//"fix&foxy")');
         $this->assertInstanceOf('PhpBench\Dom\Element', $element);
         $this->assertEquals(1, $result);
     }
