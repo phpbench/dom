@@ -35,6 +35,17 @@ class ElementTest extends TestCase
         $this->assertInstanceOf('PhpBench\Dom\Element', $element);
         $this->assertEquals(1, $result);
     }
+    
+    /**
+     * It should create and append text.
+     */
+    public function testAppendTextNode(): void
+    {
+        $element = $this->element->appendTextNode('hello', 'fix&foxy');
+        $result = $this->document->evaluate('count(//hello)');
+        $this->assertInstanceOf('PhpBench\Dom\Element', $element);
+        $this->assertEquals(1, $result);
+    }
 
     /**
      * It should exeucte an XPath query.

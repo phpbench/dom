@@ -20,7 +20,30 @@ use DOMNodeList;
 class Element extends \DOMElement implements XPathAware
 {
     /**
+     * Create and append a text-node with the given name and value.
+     *
+     * @param string $name
+     * @param string $value
+     *
+     * @return Element
+     */
+    public function appendTextNode($name, $value)
+    {
+        $el = new self($name);
+        $element = $this->appendChild($el);
+        assert($element instanceof Element);
+        
+        $element->appendChild(
+            $this->owner()->createTextNode($value)
+        );
+
+        return $element;
+    }
+    
+    /**
      * Create and append an element with the given name and optionally given value.
+     *
+     * Note: The value will not be escaped. Use DOMDocument::createTextNode() to create a text node with escaping support.
      *
      * @param string $name
      * @param mixed  $value
