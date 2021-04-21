@@ -23,7 +23,7 @@ class Element extends \DOMElement implements XPathAware
      * Create and append a text-node with the given name and optionally given value.
      *
      * @param string $name
-     * @param scalar  $value
+     * @param string $value
      *
      * @return Element
      */
