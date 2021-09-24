@@ -23,6 +23,7 @@ class XPath extends \DOMXPath
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function evaluate($expression, $contextnode = null, $registerNodeNS = true)
     {
         $result = $this->execute('evaluate', 'expression', $expression, $contextnode, $registerNodeNS);
@@ -33,6 +34,7 @@ class XPath extends \DOMXPath
     /**
      * @return DOMNodeList<DOMNode>
      */
+    #[\ReturnTypeWillChange]
     public function query($expression, $contextnode = null, $registerNodeNS = true)
     {
         return $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
@@ -64,6 +66,7 @@ class XPath extends \DOMXPath
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     private function execute(string $method, string $context, string $query, DOMNode $contextEl = null, bool $registerNodeNs = false)
     {
         libxml_use_internal_errors(true);

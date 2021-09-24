@@ -31,7 +31,11 @@ class Document extends \DOMDocument implements XPathAware
      */
     public function __construct($version = '1.0', $encoding = null)
     {
-        parent::__construct($version, $encoding);
+        if ($encoding) {
+            parent::__construct($version, $encoding);
+        } else {
+            parent::__construct($version);
+        }
         $this->registerNodeClass('DOMElement', 'PhpBench\Dom\Element');
     }
 
