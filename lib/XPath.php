@@ -22,6 +22,7 @@ class XPath extends \DOMXPath
 {
     /**
      * {@inheritdoc}
+     *
      * @param bool $registerNodeNS
      */
     #[\ReturnTypeWillChange]
