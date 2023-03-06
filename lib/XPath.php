@@ -22,6 +22,9 @@ class XPath extends \DOMXPath
 {
     /**
      * {@inheritdoc}
+     *
+     * @param mixed $contextnode
+     * @param bool $registerNodeNS
      */
     #[\ReturnTypeWillChange]
     public function evaluate($expression, $contextnode = null, $registerNodeNS = true)
@@ -32,12 +35,21 @@ class XPath extends \DOMXPath
     }
 
     /**
+     * @param bool $registerNodeNS
+     * @param mixed $contextnode
+     *
      * @return DOMNodeList<DOMNode>
      */
     #[\ReturnTypeWillChange]
-    public function query($expression, $contextnode = null, $registerNodeNS = true)
+    public function query($expression, $contextnode = null, $registerNodeNS = true): DOMNodeList
     {
-        return $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
+        $list = $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
+
+        if (!$list instanceof DOMNodeList) {
+            throw new RuntimeException(sprintf('Expected XPAth expression to return DOMNodeList, got "%s"', is_object($list) ? get_class($list) : gettype($list)));
+        }
+
+        return $list;
     }
 
     public function queryOne(string $expr, DOMNode $contextEl = null, bool $registerNodeNs = false): ?Element
@@ -54,7 +66,7 @@ class XPath extends \DOMXPath
             throw new RuntimeException(sprintf(
                 'Expected "%s" but got "%s"',
                 Element::class,
-                get_class($node)
+                $node ? get_class($node) : gettype($node)
             ));
         }
 
@@ -64,10 +76,12 @@ class XPath extends \DOMXPath
     /**
      * Execute the given xpath method and cactch any errors.
      *
+     * @param mixed $contextEl
+     *
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    private function execute(string $method, string $context, string $query, DOMNode $contextEl = null, bool $registerNodeNs = false)
+    private function execute(string $method, string $context, string $query, $contextEl = null, bool $registerNodeNs = false)
     {
         libxml_use_internal_errors(true);
 
@@ -85,7 +99,10 @@ class XPath extends \DOMXPath
 
             throw new Exception\InvalidQueryException(sprintf(
                 'Errors encountered when evaluating XPath %s "%s": %s%s',
-                $context, $query, PHP_EOL, implode(PHP_EOL, $errors)
+                $context,
+                $query,
+                PHP_EOL,
+                implode(PHP_EOL, $errors)
             ));
         }
 
