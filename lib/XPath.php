@@ -22,9 +22,10 @@ class XPath extends \DOMXPath
 {
     /**
      * {@inheritdoc}
+     * @param bool $registerNodeNS
      */
     #[\ReturnTypeWillChange]
-    public function evaluate($expression, ?DOMNode $contextnode = null, bool $registerNodeNS = true)
+    public function evaluate($expression, ?DOMNode $contextnode = null, $registerNodeNS = true)
     {
         $result = $this->execute('evaluate', 'expression', $expression, $contextnode, $registerNodeNS);
 
