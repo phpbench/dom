@@ -24,7 +24,7 @@ class XPath extends \DOMXPath
      * {@inheritdoc}
      */
     #[\ReturnTypeWillChange]
-    public function evaluate($expression, $contextnode = null, $registerNodeNS = true)
+    public function evaluate($expression, ?DOMNode $contextnode = null, bool $registerNodeNS = true)
     {
         $result = $this->execute('evaluate', 'expression', $expression, $contextnode, $registerNodeNS);
 
@@ -35,7 +35,7 @@ class XPath extends \DOMXPath
      * @return DOMNodeList<DOMNode>
      */
     #[\ReturnTypeWillChange]
-    public function query($expression, $contextnode = null, $registerNodeNS = true): DOMNodeList
+    public function query($expression, ?DOMNode $contextnode = null, $registerNodeNS = true): DOMNodeList
     {
         $list = $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
 
