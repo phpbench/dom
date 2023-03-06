@@ -42,6 +42,7 @@ class Element extends \DOMElement implements XPathAware
      */
     public function appendElement(string $name, ?string $value = null): Element
     {
+        /** @phpstan-ignore-next-line */
         $element = $this->appendChild(new self($name, $value));
         assert($element instanceof Element);
 

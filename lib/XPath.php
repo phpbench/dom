@@ -23,10 +23,11 @@ class XPath extends \DOMXPath
     /**
      * {@inheritdoc}
      *
+     * @param mixed $contextnode
      * @param bool $registerNodeNS
      */
     #[\ReturnTypeWillChange]
-    public function evaluate($expression, ?DOMNode $contextnode = null, $registerNodeNS = true)
+    public function evaluate($expression, $contextnode = null, $registerNodeNS = true)
     {
         $result = $this->execute('evaluate', 'expression', $expression, $contextnode, $registerNodeNS);
 
@@ -34,10 +35,12 @@ class XPath extends \DOMXPath
     }
 
     /**
+     * @param bool $registerNodeNS
+     * @param mixed $contextnode
      * @return DOMNodeList<DOMNode>
      */
     #[\ReturnTypeWillChange]
-    public function query($expression, ?DOMNode $contextnode = null, $registerNodeNS = true): DOMNodeList
+    public function query($expression, $contextnode = null, $registerNodeNS = true): DOMNodeList
     {
         $list = $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
 
@@ -72,10 +75,11 @@ class XPath extends \DOMXPath
     /**
      * Execute the given xpath method and cactch any errors.
      *
+     * @param mixed $contextEl
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    private function execute(string $method, string $context, string $query, DOMNode $contextEl = null, bool $registerNodeNs = false)
+    private function execute(string $method, string $context, string $query, $contextEl = null, bool $registerNodeNs = false)
     {
         libxml_use_internal_errors(true);
 
