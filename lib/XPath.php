@@ -60,7 +60,7 @@ class XPath extends \DOMXPath
             throw new RuntimeException(sprintf(
                 'Expected "%s" but got "%s"',
                 Element::class,
-                get_class($node)
+                $node ? get_class($node) : gettype($node)
             ));
         }
 
