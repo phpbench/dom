@@ -37,6 +37,7 @@ class XPath extends \DOMXPath
     /**
      * @param bool $registerNodeNS
      * @param mixed $contextnode
+     *
      * @return DOMNodeList<DOMNode>
      */
     #[\ReturnTypeWillChange]
@@ -76,6 +77,7 @@ class XPath extends \DOMXPath
      * Execute the given xpath method and cactch any errors.
      *
      * @param mixed $contextEl
+     *
      * @return mixed
      */
     #[\ReturnTypeWillChange]
