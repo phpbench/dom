@@ -21,20 +21,15 @@ class Element extends \DOMElement implements XPathAware
 {
     /**
      * Create and append a text-node with the given name and value.
-     *
-     * @param string $name
-     * @param string $value
-     *
-     * @return Element
      */
-    public function appendTextNode($name, $value)
+    public function appendTextNode(string $name, ?string $value): Element
     {
         $el = new self($name);
         $element = $this->appendChild($el);
         assert($element instanceof Element);
         
         $element->appendChild(
-            $this->owner()->createTextNode($value)
+            $this->owner()->createTextNode($value ?? '')
         );
 
         return $element;
@@ -44,13 +39,8 @@ class Element extends \DOMElement implements XPathAware
      * Create and append an element with the given name and optionally given value.
      *
      * Note: The value will not be escaped. Use DOMDocument::createTextNode() to create a text node with escaping support.
-     *
-     * @param string $name
-     * @param mixed  $value
-     *
-     * @return Element
      */
-    public function appendElement($name, $value = null)
+    public function appendElement(string $name, ?string $value = null): Element
     {
         $element = $this->appendChild(new self($name, $value));
         assert($element instanceof Element);
@@ -66,13 +56,13 @@ class Element extends \DOMElement implements XPathAware
         return $this->owner()->xpath()->query($xpath, $context ?: $this);
     }
 
-    public function queryOne($xpath, DOMNode $context = null)
+    public function queryOne($xpath, DOMNode $context = null): ?Element
     {
         return $this->owner()->xpath()->queryOne($xpath, $context ?: $this);
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function evaluate($expression, DOMNode $context = null)
     {

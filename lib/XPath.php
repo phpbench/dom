@@ -35,9 +35,14 @@ class XPath extends \DOMXPath
      * @return DOMNodeList<DOMNode>
      */
     #[\ReturnTypeWillChange]
-    public function query($expression, $contextnode = null, $registerNodeNS = true)
+    public function query($expression, $contextnode = null, $registerNodeNS = true): DOMNodeList
     {
-        return $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
+        $list = $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
+        if (!$list instanceof DOMNodeList) {
+            throw new RuntimeException(sprintf('Expected XPAth expression to return DOMNodeList, got "%s"', is_object($list) ? get_class($list) : gettype($list)));
+        }
+
+        return $list;
     }
 
     public function queryOne(string $expr, DOMNode $contextEl = null, bool $registerNodeNs = false): ?Element

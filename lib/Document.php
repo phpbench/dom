@@ -27,7 +27,7 @@ class Document extends \DOMDocument implements XPathAware
 
     /**
      * @param string $version
-     * @param mixed  $encoding
+     * @param string $encoding
      */
     public function __construct($version = '1.0', $encoding = null)
     {
@@ -79,13 +79,13 @@ class Document extends \DOMDocument implements XPathAware
     /**
      * {@inheritdoc}
      */
-    public function queryOne($query, DOMNode $context = null)
+    public function queryOne($query, DOMNode $context = null): ?Element
     {
         return $this->xpath()->queryOne($query, $context);
     }
 
     /**
-     * {@inheritdoc}
+     * @return mixed
      */
     public function evaluate($expression, DOMNode $context = null)
     {
@@ -99,7 +99,7 @@ class Document extends \DOMDocument implements XPathAware
     public function dump(): string
     {
         $this->formatOutput = true;
-        $result = $this->saveXml();
+        $result = $this->saveXML();
         $this->formatOutput = false;
 
         if (false === $result) {
@@ -112,9 +112,11 @@ class Document extends \DOMDocument implements XPathAware
     public function duplicate(): Document
     {
         $dom = new self();
-        $firstChild = $dom->importNode($this->firstChild, true);
+        if ($this->firstChild) {
+            $firstChild = $dom->importNode($this->firstChild, true);
+            $dom->appendChild($firstChild);
+        }
 
-        $dom->appendChild($firstChild);
 
         return $dom;
     }
