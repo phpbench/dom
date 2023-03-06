@@ -27,14 +27,14 @@ class Element extends \DOMElement implements XPathAware
         $el = new self($name);
         $element = $this->appendChild($el);
         assert($element instanceof Element);
-        
+
         $element->appendChild(
             $this->owner()->createTextNode($value ?? '')
         );
 
         return $element;
     }
-    
+
     /**
      * Create and append an element with the given name and optionally given value.
      *

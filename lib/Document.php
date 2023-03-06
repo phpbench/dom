@@ -112,6 +112,7 @@ class Document extends \DOMDocument implements XPathAware
     public function duplicate(): Document
     {
         $dom = new self();
+
         if ($this->firstChild) {
             $firstChild = $dom->importNode($this->firstChild, true);
             $dom->appendChild($firstChild);

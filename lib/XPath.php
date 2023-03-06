@@ -38,6 +38,7 @@ class XPath extends \DOMXPath
     public function query($expression, $contextnode = null, $registerNodeNS = true): DOMNodeList
     {
         $list = $this->execute('query', 'query', $expression, $contextnode, $registerNodeNS);
+
         if (!$list instanceof DOMNodeList) {
             throw new RuntimeException(sprintf('Expected XPAth expression to return DOMNodeList, got "%s"', is_object($list) ? get_class($list) : gettype($list)));
         }
@@ -90,7 +91,10 @@ class XPath extends \DOMXPath
 
             throw new Exception\InvalidQueryException(sprintf(
                 'Errors encountered when evaluating XPath %s "%s": %s%s',
-                $context, $query, PHP_EOL, implode(PHP_EOL, $errors)
+                $context,
+                $query,
+                PHP_EOL,
+                implode(PHP_EOL, $errors)
             ));
         }
 
