@@ -1,6 +1,8 @@
 DOM
 ===
 
+**This library is abandoned**
+
 [![CI](https://github.com/phpbench/dom/actions/workflows/ci.yaml/badge.svg)](https://github.com/phpbench/dom/actions/workflows/ci.yaml)
 
 This library provides a wrapper for the PHP DOM library which makes your life
